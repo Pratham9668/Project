@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="chitale.css">
+
+	<script type="text/javascript">
+
+		$(document).ready(function()
+		{
+			$(".container").show(1000);
+			$(document).click(function()
+			{
+
+			})
+		})
+
+		function setMilkRate() {
+			var tom=document.f1.tom.value;
+			if (tom=="Cow") 
+			{
+				document.f1.milkrate.value=40;
+			}
+			if (tom=="Buffelo") 
+			{
+				document.f1.milkrate.value=50;
+			}
+		}
+
+		function billfun()
+		{
+			var mrate=parseInt(document.f1.milkrate.value);
+			var mqty=parseInt(document.f1.milkqty.value);
+
+			var bill=(mqty*mrate);
+
+			document.f1.billamt.value=bill;
+		}
+
+		function final_bill_fun()
+		{
+			var bill=parseInt(document.f1.billamt.value);
+			var gstamt=bill* parseInt(document.f1.gstper.value)/100;
+			var fbill=bill + gstamt;
+
+			document.f1.gstamt.value=gstamt;
+
+			document.f1.billamtgst.value=fbill;
+		}
+		
+	</script>
+
+</head>
+<body>
+
+		<div class="jumbotron">
+			<h1><img src="logo.png" class="logo">Chitale Dairy</h1>
+		</div>
+
+	<br><br>
+	<div class="text-center" id="about">
+
+		<img src="http://www.chitaledairy.com/sites/all/themes/chitaledairy/images/75-logo.png">
+		<p>Chitale Dairy was founded by the great visionary,<b>Late Shri Bhaskar Ganesh alias Babasaheb Chitale (B. G. Chitale).</b> 
+		A journey that began in 1939, in the small town of Bhilawadi set the stage for a revolution in the country's dairy industry. 
+
+		Babasaheb, as he was affectionately called, set out on an uphill task – to empower local farmers through an enterprise movement. He began with a small milk unit in his own backyard, with the help of fellow farmers.
+		</p>
+			
+	</div>
+
+	<br>
+
+<form name="f1">
+	
+		<div class="container well">
+							 
+				 <div class="form-horizontal">
+				 	
+				 	<div class="form-group text-center">
+				 		<label class="col-sm-12"><h2>Chitale Dairy Billing Software</h2></label>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Customer Name :-</label>
+				 		<div class="col-sm-9">
+				 			<input type="text" class="form-control" placeholder="Enter Customer Name">
+				 		</div>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Type of Milk :-</label> 		
+				 		<div class="col-sm-9">
+					 		<input type="radio" name="tom" value="Cow" onclick="setMilkRate()"> Cow
+							<input type="radio" name="tom" value="Buffelo" onclick="setMilkRate()"> Buffelo
+			 			</div>	
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Milk Rate :-</label>
+				 		<div class="col-sm-9">
+				 			<input type="text" name="milkrate" class="form-control" placeholder="Enter Milk Rate">
+				 		</div>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Milk Quantity :-</label>
+				 		<div class="col-sm-9">
+				 			<input type="text" name="milkqty" min="0" max="100" class="form-control" placeholder="Enter Milk lit." onkeyup="billfun()">
+				 		</div>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Bill Amount :-</label>
+				 		<div class="col-sm-9">
+				 			<input type="text" name="billamt" class="form-control" placeholder="Bill" onkeyup="billfun()">
+				 		</div>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Select GST :-</label>
+				 		<div class="col-sm-9" id="gst">
+				 			<select name="gstper" class="form-control gst" onchange="final_bill_fun()">
+								<option disabled selected>----Select GST----</option>
+								<option value="5">5%</option>
+								<option value="10">10%</option>
+								<option value="15">15%</option>
+							</select>
+				 		</div>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">GST Amount :-</label> 		
+				 		<div class="col-sm-9">
+					 		<input type="text" name="gstamt" class="form-control" placeholder="GST">
+			 			</div>	
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label class="col-sm-3">Bill Amount with GST </label> 		
+				 		<div class="col-sm-9">
+					 		<input type="text" name="billamtgst" class="form-control" placeholder="Bill with GST">
+			 			</div>
+				 	</div>
+
+				 	<div class="form-group text-center">
+				 		<input type="submit" value="Submit Bill" class="btn btn-success">
+						<input type="reset" value="Cancel" class="btn btn-danger">
+						<input type="button" value="Print" onclick="print()" class="btn btn-info">
+				 	</div>
+
+				 </div>
+
+			</div><!-- end of container -->
+
+			<footer>
+				<p>© Copyright Chitale. All Rights Reserved to www.chitaleDairy.in Designed by Vishal</p>
+			</footer>
+				
+</form>
+
+</body>
+</html>
